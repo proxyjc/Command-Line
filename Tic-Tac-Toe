@@ -1,0 +1,223 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Tic_Tac_Toe
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] spaces = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            int input = 0;
+            int column = 0;
+            bool xTurn = true;
+            string inputtoString;
+            Console.ReadLine();
+            Console.Clear();
+            WriteBoard();
+
+            // Game
+            while (true)
+            {
+                WriteAt(null, 10, 7);
+                WriteAt(null, 0, 9);
+                Console.Write("Your Move:");
+                WriteAt(null, 10, 9);
+                try
+                {
+                    if      (spaces[1] == 2 && spaces[2] == 2 && spaces[3] == 2)
+                    {
+                        Console.WriteLine("Player 2 wins!");
+                    }
+                    else if (spaces[1] == 2 && spaces[2] == 2 && spaces[3] == 2)
+                    {
+                        Console.WriteLine("Player 1 wins!");
+
+                    }
+                    else if (spaces[4] == 1 && spaces[5] == 1 && spaces[6] == 1)
+                    {
+                        Console.WriteLine("Player 2 wins!");
+                    }
+                    else if (spaces[4] == 2 && spaces[5] == 2 && spaces[6] == 2)
+                    {
+                        Console.WriteLine("Player 1 wins!");
+
+                    }
+                    else if (spaces[7] == 1 && spaces[8] == 1 && spaces[9] == 1)
+                    {
+                        Console.WriteLine("Player 2 wins!");
+                    }
+                    else if (spaces[7] == 2 && spaces[8] == 2 && spaces[9] == 2)
+                    {
+                        Console.WriteLine("Player 1 wins!");
+
+                    }
+                    else if (spaces[3] == 1 && spaces[5] == 1 && spaces[7] == 1)
+                    {
+                        Console.WriteLine("Player 2 wins!");
+                    }
+                    else if (spaces[3] == 2 && spaces[5] == 2 && spaces[7] == 2)
+                    {
+                        Console.WriteLine("Player 1 wins!");
+
+                    }
+                    else if (spaces[1] == 1 && spaces[5] == 1 && spaces[9] == 1)
+                    {
+                        Console.WriteLine("Player 2 wins!");
+                    }
+                    else if (spaces[1] == 2 && spaces[5] == 2 && spaces[9] == 2)
+                    {
+                        Console.WriteLine("Player 1 wins!");
+
+                    }
+                    else if (spaces[1] == 1 && spaces[4] == 1 && spaces[7] == 1)
+                    {
+                        Console.WriteLine("Player 2 wins!");
+                    }
+                    else if (spaces[1] == 2 && spaces[4] == 2 && spaces[7] == 2)
+                    {
+                        Console.WriteLine("Player 1 wins!");
+
+                    }
+                    else if (spaces[2] == 1 && spaces[5] == 1 && spaces[8] == 1)
+                    {
+                        Console.WriteLine("Player 2 wins!");
+                    }
+                    else if (spaces[2] == 2 && spaces[5] == 2 && spaces[8] == 2)
+                    {
+                        Console.WriteLine("Player 1 wins!");
+
+                    }
+                    else if (spaces[3] == 1 && spaces[6] == 1 && spaces[9] == 1)
+                    {
+                        Console.WriteLine("Player 2 wins!");
+
+                    }
+                    else if (spaces[3] == 2 && spaces[6] == 2 && spaces[9] == 2)
+                    {
+                        Console.WriteLine("Player 1 wins!");
+
+                    }
+                    input = int.Parse(Console.ReadLine());
+                    if (input > 0 && input < 10)
+                    {
+                        if (spaces[input] > 0)
+                        {
+                            goto Invalid;
+                        }
+                        else
+                        {
+                            if (xTurn)
+                            {
+                                spaces[input] = 1;
+                            }
+                            else
+                            {
+                                spaces[input] = 2;
+                            }
+                        }
+                        if (input > 6)
+                        {
+                            column = 5;
+                            if (input == 7)
+                            {
+                                input -= 5;
+                            }
+                            if (input == 8)
+                            {
+                                input -= 4;
+                            }
+                            if (input == 9)
+                            {
+                                input -= 3;
+                            }
+                        }
+                        else if (input > 3)
+                        {
+                            column = 3;
+                            if (input == 4)
+                            {
+                                input -= 2;
+                            }
+                            else if (input == 5)
+                            {
+                                input--;
+                            }
+                        }
+                        else
+                        {
+                            column = 1;
+                            if (input % 2 != 0)
+                            {
+                                input = input * 2;
+                            }
+                            else
+                            {
+                                input *= 2;
+                            }
+                        }
+                        if (xTurn)
+                        {
+                            WriteAt("x", input, column);
+                        }
+                        else if (!xTurn)
+                        {
+                            WriteAt("o", input, column);
+                        }
+                        xTurn = !xTurn;
+                        Invalid:;
+                    }
+                    else Console.WriteLine("Invalid input! Try again.");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid input! Try again.");
+                }
+            }
+        }
+        static void WriteAt(string written, int x, int y)
+        {
+            try
+            {
+                Console.SetCursorPosition(x, y);
+                Console.Write(written);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.Clear();
+                Console.WriteLine("Something has gone wrong! :(");
+            }
+        }
+        static void WriteBoard()
+        {
+            // Vertical Lines
+
+            // Left
+            WriteAt("|", 3, 1);
+            WriteAt("|", 3, 2);
+            WriteAt("|", 3, 3);
+            WriteAt("|", 3, 4);
+            WriteAt("|", 3, 5);
+            WriteAt("|", 3, 6);
+
+            // Right
+            WriteAt("|", 5, 1);
+            WriteAt("|", 5, 2);
+            WriteAt("|", 5, 3);
+            WriteAt("|", 5, 4);
+            WriteAt("|", 5, 5);
+            WriteAt("|", 5, 6);
+
+            // Horizontal Lines
+            WriteAt("_", 2, 2);
+            WriteAt("_", 4, 2);
+            WriteAt("_", 6, 2);
+            WriteAt("_", 2, 4);
+            WriteAt("_", 4, 4);
+            WriteAt("_", 6, 4);
+        }
+    }
+}
