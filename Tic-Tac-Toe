@@ -15,11 +15,9 @@ namespace Tic_Tac_Toe
             int column = 0;
             bool xTurn = true;
             string inputtoString;
-            Console.ReadLine();
             Console.Clear();
             WriteBoard();
 
-            // Game
             while (true)
             {
                 WriteAt(null, 10, 7);
@@ -28,79 +26,8 @@ namespace Tic_Tac_Toe
                 WriteAt(null, 10, 9);
                 try
                 {
-                    if      (spaces[1] == 2 && spaces[2] == 2 && spaces[3] == 2)
-                    {
-                        Console.WriteLine("Player 2 wins!");
-                    }
-                    else if (spaces[1] == 2 && spaces[2] == 2 && spaces[3] == 2)
-                    {
-                        Console.WriteLine("Player 1 wins!");
-
-                    }
-                    else if (spaces[4] == 1 && spaces[5] == 1 && spaces[6] == 1)
-                    {
-                        Console.WriteLine("Player 2 wins!");
-                    }
-                    else if (spaces[4] == 2 && spaces[5] == 2 && spaces[6] == 2)
-                    {
-                        Console.WriteLine("Player 1 wins!");
-
-                    }
-                    else if (spaces[7] == 1 && spaces[8] == 1 && spaces[9] == 1)
-                    {
-                        Console.WriteLine("Player 2 wins!");
-                    }
-                    else if (spaces[7] == 2 && spaces[8] == 2 && spaces[9] == 2)
-                    {
-                        Console.WriteLine("Player 1 wins!");
-
-                    }
-                    else if (spaces[3] == 1 && spaces[5] == 1 && spaces[7] == 1)
-                    {
-                        Console.WriteLine("Player 2 wins!");
-                    }
-                    else if (spaces[3] == 2 && spaces[5] == 2 && spaces[7] == 2)
-                    {
-                        Console.WriteLine("Player 1 wins!");
-
-                    }
-                    else if (spaces[1] == 1 && spaces[5] == 1 && spaces[9] == 1)
-                    {
-                        Console.WriteLine("Player 2 wins!");
-                    }
-                    else if (spaces[1] == 2 && spaces[5] == 2 && spaces[9] == 2)
-                    {
-                        Console.WriteLine("Player 1 wins!");
-
-                    }
-                    else if (spaces[1] == 1 && spaces[4] == 1 && spaces[7] == 1)
-                    {
-                        Console.WriteLine("Player 2 wins!");
-                    }
-                    else if (spaces[1] == 2 && spaces[4] == 2 && spaces[7] == 2)
-                    {
-                        Console.WriteLine("Player 1 wins!");
-
-                    }
-                    else if (spaces[2] == 1 && spaces[5] == 1 && spaces[8] == 1)
-                    {
-                        Console.WriteLine("Player 2 wins!");
-                    }
-                    else if (spaces[2] == 2 && spaces[5] == 2 && spaces[8] == 2)
-                    {
-                        Console.WriteLine("Player 1 wins!");
-
-                    }
-                    else if (spaces[3] == 1 && spaces[6] == 1 && spaces[9] == 1)
-                    {
-                        Console.WriteLine("Player 2 wins!");
-
-                    }
-                    else if (spaces[3] == 2 && spaces[6] == 2 && spaces[9] == 2)
-                    {
-                        Console.WriteLine("Player 1 wins!");
-
-                    }
+                    // Win Check
+                    Win_Checker(spaces);
                     input = int.Parse(Console.ReadLine());
                     if (input > 0 && input < 10)
                     {
@@ -168,7 +95,7 @@ namespace Tic_Tac_Toe
                             WriteAt("o", input, column);
                         }
                         xTurn = !xTurn;
-                        Invalid:;
+                    Invalid:;
                     }
                     else Console.WriteLine("Invalid input! Try again.");
                 }
@@ -191,7 +118,7 @@ namespace Tic_Tac_Toe
                 Console.WriteLine("Something has gone wrong! :(");
             }
         }
-        static void WriteBoard()
+        public static void WriteBoard()
         {
             // Vertical Lines
 
@@ -218,6 +145,34 @@ namespace Tic_Tac_Toe
             WriteAt("_", 2, 4);
             WriteAt("_", 4, 4);
             WriteAt("_", 6, 4);
+        }
+        static void Win_Checker(int[] spaces)
+        {
+            int draw = 0;
+            for (int i = 1; i < 3; i++)
+            {
+                if (spaces[1] == i && spaces[2] == i && spaces[3] == i) Console.WriteLine(" Player " + i + " wins!");
+                if (spaces[4] == i && spaces[5] == i && spaces[6] == i) Console.WriteLine(" Player " + i + " wins!");
+                if (spaces[7] == i && spaces[8] == i && spaces[9] == i) Console.WriteLine(" Player " + i + " wins!");
+                if (spaces[3] == i && spaces[5] == i && spaces[7] == i) Console.WriteLine(" Player " + i + " wins!");
+                if (spaces[1] == i && spaces[5] == i && spaces[9] == i) Console.WriteLine(" Player " + i + " wins!");
+                if (spaces[1] == i && spaces[4] == i && spaces[7] == i) Console.WriteLine(" Player " + i + " wins!");
+                if (spaces[2] == i && spaces[5] == i && spaces[8] == i) Console.WriteLine(" Player " + i + " wins!");
+                if (spaces[3] == i && spaces[6] == i && spaces[9] == i) Console.WriteLine(" Player " + i + " wins!");
+            }
+            for (int i = 0; i < spaces.Length; i++)
+            {
+                if (spaces[i] == 0)
+                    break;
+                if (spaces[i] != 0)
+                {
+                    draw++;
+                    if (draw == 9)
+                    {
+                        Console.WriteLine("Round Draw!");
+                    }
+                }
+            }
         }
     }
 }
